@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @wiki.title
+%p
+  %b Body:
+  = @wiki.body
+%p
+  %b Public:
+  = @wiki.public
+
+= link_to 'Edit', edit_wiki_path(@wiki)
+\|
+= link_to 'Back', wikis_path
