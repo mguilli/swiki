@@ -1,8 +1,11 @@
 Swiki::Application.routes.draw do
   devise_for :users
-  resources :wikis
-
-  get 'my_wiki' => 'wiki#my_wiki' #as: :my_wiki
+  resources :wikis do
+    # get '/my_wiki' => 'wikis#my_wiki', as: :my_wiki
+    collection do
+      get :my_wiki
+    end
+  end
 
   # get "welcome/index"
   
