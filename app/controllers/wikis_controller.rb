@@ -3,14 +3,14 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @wikis = Wiki.where(public: true)
-  end
-
-  def my_wiki
-    @wiki_key = current_user.collabs.where(owner: true).pluck(:wiki_id)
-    @my_wikis = Wiki.where(id: [@wiki_key])
-    @collab_key = current_user.collabs.where(owner: false).pluck(:wiki_id)
-    @collab_wikis = Wiki.where(id: [@collab_key])
+    case params[:filter]
+    when "mine"
+      @my_wikis = Wiki.by_user_wikis(current_user.id)
+      @collab_wikis = Wiki.by_user_collabs(current_user.id)
+      render "my_wiki"
+    else
+      @wikis = Wiki.where(public: true)
+    end
   end
 
   def show

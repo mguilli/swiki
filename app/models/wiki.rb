@@ -2,9 +2,13 @@ class Wiki < ActiveRecord::Base
   has_many :collabs
   has_many :users, through: :collabs
 
-  # def self.wiki_key(user)
-  #   user.collabs.where(owner: true).pluck(:wiki_id)
-  # end
+  scope :by_user_collabs, -> (id){
+    Wiki.joins(:collabs).where("collabs.user_id = ?",id).where("collabs.owner = ?", false)
+  }
+
+  scope :by_user_wikis, -> (id){
+    Wiki.joins(:collabs).where("collabs.user_id = ?", id).where("collabs.owner = ?", true)
+  }
 
   def self.create_wiki_seed(user, title, public = true)
     newwiki = Wiki.new(

@@ -11,6 +11,7 @@ gem 'pundit'
 gem 'faker'
 gem 'bootstrap-sass'
 gem 'figaro'
+gem 'pry'
 
 # Use HAML to write views instead of ERB
 gem 'haml-rails'
