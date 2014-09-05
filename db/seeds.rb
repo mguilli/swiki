@@ -26,10 +26,10 @@ paiduser.skip_confirmation!
 paiduser.save
 
 # Create wiki articles and associated collab entries
-Wiki.create_wiki(freeuser, "Dog Poop")
-Wiki.create_wiki(freeuser, "Cat")
-Wiki.create_wiki(paiduser, "Rat")
-Wiki.create_wiki(paiduser, "Monkey", false)
+Wiki.create_wiki_seed(freeuser, "Dog Poop")
+Wiki.create_wiki_seed(freeuser, "Cat")
+Wiki.create_wiki_seed(paiduser, "Rat")
+Wiki.create_wiki_seed(paiduser, "Monkey", false)
 
 #Create collaboration on Monkey article
 Collab.create(
@@ -42,6 +42,3 @@ puts "Seed finished"
 puts "#{User.count} users created."
 puts "#{Wiki.count} wikis created."
 puts "#{Collab.count} collaborations created."
-
-public 
-

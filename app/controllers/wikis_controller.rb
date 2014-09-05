@@ -10,7 +10,7 @@ class WikisController < ApplicationController
     @wiki_key = current_user.collabs.where(owner: true).pluck(:wiki_id)
     @my_wikis = Wiki.where(id: [@wiki_key])
     @collab_key = current_user.collabs.where(owner: false).pluck(:wiki_id)
-    @collabs = Wiki.where(id: [@collab_key])
+    @collab_wikis = Wiki.where(id: [@collab_key])
   end
 
   def show
@@ -25,15 +25,15 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(wiki_params)
+    @collab = @wiki.collabs.build(
+      owner: true,
+      user_id: current_user.id
+    )
 
-    respond_to do |format|
-      if @wiki.save
-        format.html { redirect_to @wiki, notice: 'Wiki was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @wiki }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @wiki.errors, status: :unprocessable_entity }
-      end
+    if @wiki.save #&& @collab.save
+      redirect_to @wiki, notice: 'Wiki was successfully created.'
+    else
+      render action: 'new' 
     end
   end
 

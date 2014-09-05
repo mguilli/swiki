@@ -6,7 +6,7 @@ class Wiki < ActiveRecord::Base
   #   user.collabs.where(owner: true).pluck(:wiki_id)
   # end
 
-  def self.create_wiki(user, title, public = true)
+  def self.create_wiki_seed(user, title, public = true)
     newwiki = Wiki.new(
       title: title,
       body: "This is a #{title} article.",
