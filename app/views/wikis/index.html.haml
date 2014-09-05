@@ -1,22 +1,20 @@
 %h1 Listing wikis
 
-%table
-  %tr
-    %th Title
-    %th Body
-    %th Public
-    %th
-    %th
-    %th
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th Options
 
   - @wikis.each do |wiki|
     %tr
       %td= wiki.title
       %td= wiki.body
-      %td= wiki.public
-      %td= link_to 'Show', wiki
-      %td= link_to 'Edit', edit_wiki_path(wiki)
-      %td= link_to 'Destroy', wiki, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = link_to 'Show', wiki
+        - if current_user
+          = link_to 'Edit', edit_wiki_path(wiki)
 
 %br
 

@@ -1,1 +1,26 @@
-%h1 My Wikis
+%h4 My Wikis
+
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th Veiwable To:
+      %th Options
+
+  - @my_wikis.each do |wiki|
+    %tr
+      %td= wiki.title
+      %td= wiki.body
+      - if wiki.public == true
+        %td Everyone
+      - else
+        %td Only Me
+      %td
+        = link_to 'Show', wiki
+        = link_to 'Edit', edit_wiki_path(wiki)
+        = link_to 'Destroy', wiki, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%h4 My Collaborations
+
+

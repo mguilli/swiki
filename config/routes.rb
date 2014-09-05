@@ -1,5 +1,7 @@
 Swiki::Application.routes.draw do
+  get "collab/index"
   devise_for :users
+  resources :collabs, only: [:index]
   resources :wikis do
     # get '/my_wiki' => 'wikis#my_wiki', as: :my_wiki
     collection do

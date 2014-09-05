@@ -1,11 +1,14 @@
 class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.where(public: true)
   end
 
   def my_wiki
+    @my_wikis_key = current_user.collabs.where(owner: true).pluck(:wiki_id)
+    @my_wikis = Wiki.where(id: [@my_wikis_key])
   end
 
   def show
