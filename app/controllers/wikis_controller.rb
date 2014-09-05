@@ -1,28 +1,23 @@
 class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
 
-  # GET /wikis
-  # GET /wikis.json
   def index
     @wikis = Wiki.all
   end
 
-  # GET /wikis/1
-  # GET /wikis/1.json
+  def my_wiki
+  end
+
   def show
   end
 
-  # GET /wikis/new
   def new
     @wiki = Wiki.new
   end
 
-  # GET /wikis/1/edit
   def edit
   end
 
-  # POST /wikis
-  # POST /wikis.json
   def create
     @wiki = Wiki.new(wiki_params)
 
@@ -37,8 +32,6 @@ class WikisController < ApplicationController
     end
   end
 
-  # PATCH/PUT /wikis/1
-  # PATCH/PUT /wikis/1.json
   def update
     respond_to do |format|
       if @wiki.update(wiki_params)
@@ -51,8 +44,6 @@ class WikisController < ApplicationController
     end
   end
 
-  # DELETE /wikis/1
-  # DELETE /wikis/1.json
   def destroy
     @wiki.destroy
     respond_to do |format|

@@ -2,6 +2,8 @@ Swiki::Application.routes.draw do
   devise_for :users
   resources :wikis
 
+  get 'my_wiki' => 'wiki#my_wiki' #as: :my_wiki
+
   # get "welcome/index"
   
   # The priority is based upon order of creation: first created -> highest priority.
