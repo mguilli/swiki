@@ -2,10 +2,9 @@ class Wiki < ActiveRecord::Base
   has_many :collabs
   has_many :users, through: :collabs
 
-
-  def owner
-    collabs.where(owner: true).first.user
-  end
+  # def self.wiki_key(user)
+  #   user.collabs.where(owner: true).pluck(:wiki_id)
+  # end
 
   def self.create_wiki(user, title, public = true)
     newwiki = Wiki.new(

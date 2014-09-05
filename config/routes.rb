@@ -1,5 +1,4 @@
 Swiki::Application.routes.draw do
-  get "collab/index"
   devise_for :users
   resources :collabs, only: [:index]
   resources :wikis do

@@ -7,8 +7,10 @@ class WikisController < ApplicationController
   end
 
   def my_wiki
-    @my_wikis_key = current_user.collabs.where(owner: true).pluck(:wiki_id)
-    @my_wikis = Wiki.where(id: [@my_wikis_key])
+    @wiki_key = current_user.collabs.where(owner: true).pluck(:wiki_id)
+    @my_wikis = Wiki.where(id: [@wiki_key])
+    @collab_key = current_user.collabs.where(owner: false).pluck(:wiki_id)
+    @collabs = Wiki.where(id: [@collab_key])
   end
 
   def show

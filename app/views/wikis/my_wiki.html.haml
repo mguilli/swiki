@@ -5,7 +5,7 @@
     %tr
       %th Title
       %th Body
-      %th Veiwable To:
+      %th Visibility
       %th Options
 
   - @my_wikis.each do |wiki|
@@ -13,9 +13,9 @@
       %td= wiki.title
       %td= wiki.body
       - if wiki.public == true
-        %td Everyone
+        %td Public
       - else
-        %td Only Me
+        %td Private
       %td
         = link_to 'Show', wiki
         = link_to 'Edit', edit_wiki_path(wiki)
@@ -23,4 +23,18 @@
 
 %h4 My Collaborations
 
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th Options
+
+  - @collabs.each do |wiki|
+    %tr
+      %td= wiki.title
+      %td= wiki.body
+      %td
+        = link_to 'Show', wiki
+        = link_to 'Edit', edit_wiki_path(wiki)
 
