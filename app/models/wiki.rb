@@ -1,5 +1,5 @@
 class Wiki < ActiveRecord::Base
-  has_many :collabs
+  has_many :collabs, dependent: :destroy
   has_many :users, through: :collabs
 
   scope :by_user_collabs, -> (id){

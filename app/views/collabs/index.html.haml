@@ -1,1 +1,18 @@
-%h2 Collabs index
+%h4 
+  Wiki Owner:
+= @owner.name
+= @owner.email
+
+%h4 Current Collaborators
+- @current.each do |user|
+  = user.name
+  = user.email
+  = link_to "Remove", '#'
+  %br
+
+%h4 Available Collaborator
+- @available.each do |user|
+  = user.name
+  = user.email
+  = link_to "Add", '#'
+  %br

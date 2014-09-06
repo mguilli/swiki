@@ -19,7 +19,8 @@
       - else
         %td 
           Private
-          = link_to 'Add Collaborators', '#'
+          = link_to 'Make Public', '#'
+          = link_to 'Collaborators', collabs_path(id: wiki.id)
       %td
         = link_to 'Show', wiki
         = link_to 'Edit', edit_wiki_path(wiki)
