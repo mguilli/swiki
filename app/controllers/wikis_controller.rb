@@ -3,8 +3,9 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    case params[:filter]
+    case params[:option]
     when "mine"
+      authenticate_user!
       @my_wikis = Wiki.by_user_wikis(current_user.id)
       @collab_wikis = Wiki.by_user_collabs(current_user.id)
       render "my_wiki"
@@ -38,14 +39,15 @@ class WikisController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @wiki.update(wiki_params)
-        format.html { redirect_to @wiki, notice: 'Wiki was successfully updated.' }
-        format.json { head :no_content }
+    if @wiki.update(wiki_params)
+      case params[:option]
+      when "fromlink"
+        redirect_to :back
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @wiki.errors, status: :unprocessable_entity }
+        redirect_to @wiki, notice: 'Wiki was successfully updated.'
       end
+    else
+      render action: 'edit'
     end
   end
 

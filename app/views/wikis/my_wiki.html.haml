@@ -13,9 +13,13 @@
       %td= wiki.title
       %td= wiki.body
       - if wiki.public == true
-        %td Public
+        %td 
+          Public
+          = link_to 'Make Private', wiki_path(wiki, :wiki => {public: false}, option: "fromlink"), method: :put
       - else
-        %td Private
+        %td 
+          Private
+          = link_to 'Add Collaborators', '#'
       %td
         = link_to 'Show', wiki
         = link_to 'Edit', edit_wiki_path(wiki)

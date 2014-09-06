@@ -25,17 +25,41 @@ paiduser = User.new(
 paiduser.skip_confirmation!
 paiduser.save
 
+# Create another paid account user
+paiduser2 = User.new(
+  name: 'Paid User2',
+  email: 'paiduser2@example.org',
+  password: 'password',
+  premium_user: true
+)
+paiduser2.skip_confirmation!
+paiduser2.save
+
 # Create wiki articles and associated collab entries
 Wiki.create_wiki_seed(freeuser, "Dog Poop")
 Wiki.create_wiki_seed(freeuser, "Cat")
 Wiki.create_wiki_seed(paiduser, "Rat")
 Wiki.create_wiki_seed(paiduser, "Monkey", false)
+Wiki.create_wiki_seed(paiduser, "Giraffe", false)
+Wiki.create_wiki_seed(paiduser2, "Dolphin", false)
 
-#Create collaboration on Monkey article
+#Create collaboration on articles
 Collab.create(
   owner: false,
   user_id: freeuser.id,
-  wiki_id: Wiki.last.id
+  wiki_id: 4
+)
+
+Collab.create(
+  owner: false,
+  user_id: freeuser.id,
+  wiki_id: 5
+)
+
+Collab.create(
+  owner: false,
+  user_id: paiduser.id,
+  wiki_id: 6
 )
 
 puts "Seed finished"
