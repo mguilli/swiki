@@ -1,11 +1,7 @@
 Swiki::Application.routes.draw do
   devise_for :users
-  resources :collabs #, except: [:index]
   resources :wikis do
-    # get '/my_wiki' => 'wikis#my_wiki', as: :my_wiki
-    collection do
-      get :my_wiki
-    end
+    resources :collabs #, except: [:index]
   end
 
   # get "welcome/index"

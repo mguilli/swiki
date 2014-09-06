@@ -7,7 +7,7 @@
 - @current.each do |user|
   = user.name
   = user.email
-  = link_to "Remove", '#'
+  = link_to "Remove", wiki_collab_path(@wiki, id: Collab.collab_id(@wiki, user)), method: :delete
   %br
 
 %h4 Available Collaborator
