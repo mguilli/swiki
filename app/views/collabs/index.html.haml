@@ -14,5 +14,5 @@
 - @available.each do |user|
   = user.name
   = user.email
-  = link_to "Add", '#'
+  = link_to "Add", wiki_collabs_path(@wiki, :collab => {owner: false, wiki_id: @wiki.id, user_id: user.id}), method: :post
   %br
