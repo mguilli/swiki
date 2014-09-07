@@ -3,7 +3,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
       ## Customization
       t.string :name,               null: false, default: ""
-      t.boolean :premium_user, default: false
+      t.string :role,               null: false, default: "free"
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

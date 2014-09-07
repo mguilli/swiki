@@ -20,20 +20,20 @@ paiduser = User.new(
   name: 'Paid User',
   email: 'paiduser@example.org',
   password: 'password',
-  premium_user: true
+  role: 'premium'
 )
 paiduser.skip_confirmation!
 paiduser.save
 
 # Create another paid account user
-paiduser2 = User.new(
-  name: 'Paid User2',
-  email: 'paiduser2@example.org',
+admin = User.new(
+  name: 'Admin User',
+  email: 'admin@example.org',
   password: 'password',
-  premium_user: true
+  role: 'admin'
 )
-paiduser2.skip_confirmation!
-paiduser2.save
+admin.skip_confirmation!
+admin.save
 
 # Create wiki articles and associated collab entries
 Wiki.create_wiki_seed(freeuser, "Dog Poop")
@@ -41,7 +41,7 @@ Wiki.create_wiki_seed(freeuser, "Cat")
 Wiki.create_wiki_seed(paiduser, "Rat")
 Wiki.create_wiki_seed(paiduser, "Monkey", false)
 Wiki.create_wiki_seed(paiduser, "Giraffe", false)
-Wiki.create_wiki_seed(paiduser2, "Dolphin", false)
+Wiki.create_wiki_seed(admin, "Dolphin", false)
 
 #Create collaboration on articles
 Collab.create(

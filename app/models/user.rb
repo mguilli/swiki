@@ -7,14 +7,16 @@ class User < ActiveRecord::Base
   has_many :collabs, dependent: :destroy       
   has_many :wikis, through: :collabs
 
-scope :owner_by_wiki, -> (wiki_id){
-  User.joins(:collabs).where("collabs.wiki_id = ?", wiki_id).where("collabs.owner = ?", true).first    
-}
+  scope :owner_by_wiki, -> (wiki_id){
+    User.joins(:collabs).where("collabs.wiki_id = ?", wiki_id).where("collabs.owner = ?", true).first    
+  }
 
-scope :current_collaborators, -> (wiki_id){
-  User.joins(:collabs).where("collabs.wiki_id = ?", wiki_id).where("collabs.owner = ?", false)
-}
-  def method_name
+  scope :current_collaborators, -> (wiki_id){
+    User.joins(:collabs).where("collabs.wiki_id = ?", wiki_id).where("collabs.owner = ?", false)
+  }
+  
+  def role?(base_role)
+    role == base_role.to_s
   end
 
 end

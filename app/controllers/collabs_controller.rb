@@ -8,10 +8,6 @@ class CollabsController < ApplicationController
     @available = User.where.not(id: @owner.id) - @current.to_a
   end
 
-  def new
-    @collab = Collab.new
-  end
-  
   def create
     @wiki = Wiki.find(params[:wiki_id])
     @collab = Collab.new(collab_params)

@@ -12,9 +12,9 @@
   .field
     = f.label :body
     = f.text_field :body
-  - if current_user.premium_user
-    .field
-      = f.label :public
-      = f.check_box :public
+  / - if current_user.premium_user
+  .field
+    = f.label :public
+    = f.check_box :public
   .actions
     = f.submit 'Save'

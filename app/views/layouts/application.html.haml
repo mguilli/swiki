@@ -23,6 +23,14 @@
             %li= link_to 'Register', new_user_registration_path
 
     .container
-      %p.notice= notice
-      %p.alert= alert
+      - if flash[:notice]
+        .alert.alert-success{:role => "alert"}
+          = flash[:notice]
+      - elsif flash[:error]
+        .alert.alert-danger{:role => "alert"}
+          = flash[:error]
+      - elsif flash[:alert]
+        .alert.alert-warning{:role => "alert"}
+          = flash[:alert]
+
       = yield

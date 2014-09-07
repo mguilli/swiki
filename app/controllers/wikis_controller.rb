@@ -15,10 +15,12 @@ class WikisController < ApplicationController
   end
 
   def show
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def edit
@@ -26,6 +28,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(wiki_params)
+    authorize @wiki
     @collab = @wiki.collabs.build(
       owner: true,
       user_id: current_user.id
