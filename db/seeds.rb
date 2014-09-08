@@ -42,6 +42,8 @@ Wiki.create_wiki_seed(paiduser, "Rat")
 Wiki.create_wiki_seed(paiduser, "Monkey", false)
 Wiki.create_wiki_seed(paiduser, "Giraffe", false)
 Wiki.create_wiki_seed(admin, "Dolphin", false)
+Wiki.create_wiki_seed(admin, "Platypus", false)
+
 
 #Create collaboration on articles
 Collab.create(
@@ -62,7 +64,13 @@ Collab.create(
   wiki_id: 6
 )
 
+Collab.create(
+  owner: false,
+  user_id: freeuser.id,
+  wiki_id: 7
+)
+
 puts "Seed finished"
 puts "#{User.count} users created."
 puts "#{Wiki.count} wikis created."
-puts "#{Collab.count} collaborations created."
+puts "#{Collab.where(owner: false).count} collaborators added."

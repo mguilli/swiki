@@ -7,16 +7,15 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
-    false
-    # scope.where(:id => record.id).exists?
+    record.public || user.role?(:admin) || (user.present? && (record.collabs.where(user_id: user.id).present?))
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -24,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    show?
   end
 
   def edit?
@@ -32,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    user.role?(:admin)
   end
 
   def scope
@@ -48,7 +47,11 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope
+      if user.role?(:admin)
+        scope.all
+      else
+        scope.where(public: true)
+      end
     end
   end
 end

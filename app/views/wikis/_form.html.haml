@@ -12,9 +12,17 @@
   .field
     = f.label :body
     = f.text_field :body
-  / - if current_user.premium_user
-  .field
-    = f.label :public
-    = f.check_box :public
+  - case @switch when "edit"
+    - if policy(@wiki).make_private_edit?
+      .field
+        = f.label :public
+        = f.check_box :public
+  - when "new"
+    - if policy(@wiki).make_private_new?
+      .field
+        = f.label :public
+        = f.check_box :public
+  - else
+
   .actions
     = f.submit 'Save'

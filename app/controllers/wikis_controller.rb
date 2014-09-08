@@ -1,6 +1,9 @@
 class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  after_action :verify_authorized, except: :index
+  # after_action :verify_policy_scoped, only: :index
+
 
   def index
     case params[:option]
@@ -10,7 +13,7 @@ class WikisController < ApplicationController
       @collab_wikis = Wiki.by_user_collabs(current_user.id)
       render "my_wiki"
     else
-      @wikis = Wiki.where(public: true)
+      @wikis = policy_scope(Wiki)
     end
   end
 
@@ -21,9 +24,12 @@ class WikisController < ApplicationController
   def new
     @wiki = Wiki.new
     authorize @wiki
+    @switch = "new"
   end
 
   def edit
+    authorize @wiki
+    @switch = "edit"
   end
 
   def create
@@ -42,6 +48,7 @@ class WikisController < ApplicationController
   end
 
   def update
+    authorize @wiki
     if @wiki.update(wiki_params)
       case params[:option]
       when "fromlink"
@@ -55,6 +62,7 @@ class WikisController < ApplicationController
   end
 
   def destroy
+    authorize @wiki
     @wiki.destroy
     respond_to do |format|
       format.html { redirect_to wikis_url }
@@ -66,6 +74,10 @@ class WikisController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_wiki
       @wiki = Wiki.find(params[:id])
+
+      rescue ActiveRecord::RecordNotFound
+        flash[:error] = "Record not found."
+        redirect_to root_path 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
