@@ -5,12 +5,29 @@
     %tr
       %th Title
       %th Body
+      - if current_user.role?(:admin)
+        %th Author
+        %th Visibility
       %th Options
 
   - @wikis.each do |wiki|
     %tr
       %td= wiki.title
       %td= wiki.body
+      - if current_user.role?(:admin)
+        %td
+          = User.owner_by_wiki(wiki.id).name
+          |
+          = link_to wiki_collabs_path(wiki) do
+            Collaborators
+            %span.badge
+              = (wiki.collabs.count - 1)
+        %td
+          - if wiki.public
+            Public
+          - else
+            Private
+          = link_to 'Destroy', wiki, class: 'btn btn-danger btn-xs', method: :delete, data: {confirm: 'Are you sure?'}
       %td
         = link_to 'Show', wiki
         - if current_user
