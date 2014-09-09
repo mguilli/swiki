@@ -13,7 +13,8 @@ class WikisController < ApplicationController
       @collab_wikis = Wiki.by_user_collabs(current_user.id)
       render "my_wiki"
     else
-      @wikis = policy_scope(Wiki)
+      # Wiki.all for admin, Wiki.where(public: true) for all others
+      @wikis = policy_scope(Wiki) 
     end
   end
 

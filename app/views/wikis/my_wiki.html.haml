@@ -22,7 +22,7 @@
         %td 
           Private
           - if policy(wiki).make_private_edit?
-            = link_to 'Make Public', '#'
+            = link_to 'Make Public', wiki_path(wiki, :wiki => {public: true}, option: "fromlink"), method: :put
       %td
         = link_to wiki_collabs_path(wiki) do
           Collaborators
