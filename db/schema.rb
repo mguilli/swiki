@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20140903183944) do
 
   create_table "wikis", force: true do |t|
     t.string   "title"
-    t.string   "body"
+    t.text     "body"
     t.boolean  "public",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"

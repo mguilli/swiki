@@ -13,6 +13,8 @@ gem 'bootstrap-sass'
 gem 'figaro'
 gem 'pry'
 
+gem 'redcarpet'
+
 # Use HAML to write views instead of ERB
 gem 'haml-rails'
 

@@ -1,15 +1,13 @@
-%p#notice= notice
+.row
+  .col-md-8
+    = link_to 'Edit', edit_wiki_path(@wiki)
+    \|
+    = link_to 'Back', :back
+    %h3 
+      Title:
+      = @wiki.title
+    %p
+      %h3 Body:
+      = markdown( @wiki.body )
 
-%p
-  %b Title:
-  = @wiki.title
-%p
-  %b Body:
-  = @wiki.body
-%p
-  %b Public:
-  = @wiki.public
 
-= link_to 'Edit', edit_wiki_path(@wiki)
-\|
-= link_to 'Back', :back

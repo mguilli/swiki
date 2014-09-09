@@ -6,23 +6,32 @@
         - @wiki.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :body
-    = f.text_field :body
-  - case @switch when "edit"
-    - if policy(@wiki).make_private_edit?
-      .field
-        = f.label :public
-        = f.check_box :public
-  - when "new"
-    - if policy(@wiki).make_private_new?
-      .field
-        = f.label :public
-        = f.check_box :public
-  - else
+  .col-md-8
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: "form-control"
+    .form-group
+      = f.label :body
+      = f.text_area :body, rows: 12, class: "form-control", placeholder: "You can use Markdown syntax to edit wiki."
+    - case @switch when "edit"
+      - if policy(@wiki).make_private_edit?
+        .form-group
+          = f.label :public
+          = f.check_box :public
+    - when "new"
+      - if policy(@wiki).make_private_new?
+        .form-group
+          = f.label :public
+          = f.check_box :public
+    - else
 
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.submit 'Save', class: "btn btn-primary"
+
+  .col-md-4
+    %h4 Wiki syntax rules:
+    %ul
+      %li Hit Enter twice for line breaks 
+      %li No raw HTML allowed
+      %li
+        = link_to 'Markdown syntax guide', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lines'

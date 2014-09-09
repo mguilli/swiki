@@ -5,7 +5,7 @@
     %tr
       %th Title
       %th Body
-      - if current_user.role?(:admin)
+      - if current_user.present? && current_user.role?(:admin)
         %th Author
         %th Visibility
       %th Options
@@ -13,8 +13,8 @@
   - @wikis.each do |wiki|
     %tr
       %td= wiki.title
-      %td= wiki.body
-      - if current_user.role?(:admin)
+      %td= truncate(strip_tags(markdown(wiki.body)), length: 50)
+      - if current_user.present? && current_user.role?(:admin)
         %td
           = User.owner_by_wiki(wiki.id).name
           |

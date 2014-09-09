@@ -15,6 +15,7 @@ class WikisController < ApplicationController
     else
       # Wiki.all for admin, Wiki.where(public: true) for all others
       @wikis = policy_scope(Wiki) 
+      # @wikis = Wiki.where(public: true)
     end
   end
 

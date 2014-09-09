@@ -47,7 +47,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      if user.role?(:admin)
+      if user.present? && user.role?(:admin)
         scope.all
       else
         scope.where(public: true)
