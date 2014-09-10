@@ -16,6 +16,7 @@ class WikisController < ApplicationController
       # Wiki.all for admin, Wiki.where(public: true) for all others
       @wikis = policy_scope(Wiki) 
       # @wikis = Wiki.where(public: true)
+      @collabs_count = Wiki.grouped_collabs.count
     end
   end
 

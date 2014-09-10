@@ -1,5 +1,5 @@
 class ChargesController < ApplicationController
-  after_action :user_to_premium, only: :create
+  # after_action :user_to_premium, only: :create
 
   def create
     
@@ -19,6 +19,7 @@ class ChargesController < ApplicationController
     )
 
     flash[:notice] = "Welcome to Swiki Premium Membership, #{current_user.email}!"
+    user_to_premium
     redirect_to root_path
 
   rescue Stripe::CardError => e

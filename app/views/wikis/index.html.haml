@@ -16,12 +16,12 @@
       %td= truncate(strip_tags(markdown(wiki.body)), length: 50)
       - if current_user.present? && current_user.role?(:admin)
         %td
-          = User.owner_by_wiki(wiki.id).name
+          = wiki.owner.name
           |
           = link_to wiki_collabs_path(wiki) do
             Collaborators
             %span.badge
-              = (wiki.collabs.count - 1)
+              = (@collabs_count[wiki.id] - 1)
         %td
           - if wiki.public
             Public

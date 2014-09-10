@@ -48,7 +48,7 @@ class ApplicationPolicy
 
     def resolve
       if user.present? && user.role?(:admin)
-        scope.all
+        scope.includes(:owner).load
       else
         scope.where(public: true)
       end

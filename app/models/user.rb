@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
 
     user_wikis.update_all( public: true) 
 
+    # Wiki.update(user_wikis.ids, {public: true})
     user_wikis.each do |wiki|
       wiki.remove_collabs
     end
