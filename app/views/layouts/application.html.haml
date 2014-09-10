@@ -16,7 +16,9 @@
             %li= link_to 'My Wikis', wikis_path(option: "mine")
         %ul.nav.navbar-nav.navbar-right
           - if current_user
-            %li= link_to "Hello, #{current_user.name}", edit_user_registration_path
+            %li= link_to "Hello, #{current_user.name} | #{current_user.role.capitalize} Account", edit_user_registration_path
+            - if policy(:charge).new?
+              %li= link_to "Upgrade!", new_charge_path
             %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
           - else
             %li= link_to 'Sign In', new_user_session_path

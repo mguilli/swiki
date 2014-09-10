@@ -1,8 +1,11 @@
 Swiki::Application.routes.draw do
+  get "charges/create"
+  get "charges/new"
   devise_for :users
   resources :wikis do
     resources :collabs #, except: [:index]
   end
+  resources :charges, only: [:create, :new]
 
   # get "welcome/index"
   

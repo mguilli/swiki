@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'pry'
 
 gem 'redcarpet'
+gem 'stripe'
 
 # Use HAML to write views instead of ERB
 gem 'haml-rails'
