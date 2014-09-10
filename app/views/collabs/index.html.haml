@@ -7,12 +7,14 @@
 - @current.each do |user|
   = user.name
   = user.email
-  = link_to "Remove", wiki_collab_path(@wiki, id: Collab.collab_id(@wiki, user)), method: :delete
+  - if policy(@wiki).collab_add_remove?
+    = link_to "Remove", wiki_collab_path(@wiki, id: Collab.collab_id(@wiki, user)), method: :delete
   %br
 
 %h4 Available Collaborator
 - @available.each do |user|
   = user.name
   = user.email
-  = link_to "Add", wiki_collabs_path(@wiki, :collab => {owner: false, wiki_id: @wiki.id, user_id: user.id}), method: :post
+  - if policy(@wiki).collab_add_remove?
+    = link_to "Add", wiki_collabs_path(@wiki, :collab => {owner: false, wiki_id: @wiki.id, user_id: user.id}), method: :post
   %br

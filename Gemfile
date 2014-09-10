@@ -15,6 +15,7 @@ gem 'pry'
 
 gem 'redcarpet'
 gem 'stripe'
+gem 'friendly_id'
 
 # Use HAML to write views instead of ERB
 gem 'haml-rails'

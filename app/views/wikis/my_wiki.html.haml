@@ -12,7 +12,7 @@
   - @my_wikis.each do |wiki|
     %tr
       %td= wiki.title
-      %td= wiki.body
+      %td= truncate(strip_tags(markdown(wiki.body)), length: 50)
       - if wiki.public == true
         %td 
           Public

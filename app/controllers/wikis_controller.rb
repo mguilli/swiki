@@ -75,7 +75,7 @@ class WikisController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wiki
-      @wiki = Wiki.find(params[:id])
+      @wiki = Wiki.friendly.find(params[:id])
 
       rescue ActiveRecord::RecordNotFound
         flash[:error] = "Record not found."

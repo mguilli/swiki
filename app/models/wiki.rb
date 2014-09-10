@@ -4,6 +4,9 @@ class Wiki < ActiveRecord::Base
   # has_many :owners, through: :collabs, -> { "collabs.owner = ?", true}, class_name: "User"
   after_update :remove_collabs, if: :public_wiki?
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   scope :by_user_collabs, -> (id){
     Wiki.joins(:collabs).where("collabs.user_id = ?",id).where("collabs.owner = ?", false)
   }

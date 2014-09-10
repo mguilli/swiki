@@ -5,7 +5,7 @@ class CollabsController < ApplicationController
 
 
   def index
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     authorize @wiki, :show_collabs?
     @owner = User.owner_by_wiki(@wiki.id)
     @current = User.current_collaborators(@wiki.id)
@@ -13,7 +13,7 @@ class CollabsController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     authorize @wiki, :collab_add_remove?
     @collab = Collab.new(collab_params)
     authorize @collab
@@ -26,7 +26,7 @@ class CollabsController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     authorize @wiki, :collab_add_remove?
 
     @collab = Collab.find(params[:id])
